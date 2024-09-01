@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 120px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .form-group .gender-options {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group .gender-options label {
+            margin-right: 20px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Student</h2>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '<%= error %>'
+                });
+            </script>
+        <% } %>
+        <form action="/edit-student/<%= student._id %>?_method=PATCH" method="POST">
+            <input type="hidden" name="_method" value="PATCH">
+            <div class="form-group">
+                <label for="name">Student Name</label>
+                <input type="text" id="name" name="name" value="<%= student.name %>" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="class">Class</label>
+                <select id="class" name="class" required>
+                    <% [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].forEach(cls => { %>
+                        <option value="<%= cls %>" <%= student.class == cls.toString() ? 'selected' : '' %>>Class <%= cls %></option>
+                    <% }) %>
+                </select>            
+            </div>
+        
+            <div class="form-group">
+                <label for="division">Division</label>
+                <select id="division" name="division" required>
+                    <% ['A', 'B', 'C'].forEach(div => { %>
+                        <option value="<%= div %>" <%= student.division === div ? 'selected' : '' %>><%= div %></option>
+                    <% }) %>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-options">
+                    <label>
+                        <input type="radio" name="gender" value="Male" <%= student.gender === 'Male' ? 'checked' : '' %>> Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female" <%= student.gender === 'Female' ? 'checked' : '' %>> Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Other" <%= student.gender === 'Other' ? 'checked' : '' %>> Other
+                    </label>
+                </div>
+            </div>
+        
+            <button type="submit" class="btn-submit">Edit</button>
+        </form>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+import { Request, Response } from 'express';
+export declare const loadSignIn: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const loadHome: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const loadAddStudent: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const signIn: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const addStudent: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const loadEditStudent: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const editStudent: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const deleteStudent: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
+export declare const signOut: (req: Request, res: Response, next: import("express").NextFunction) => Promise<any>;
